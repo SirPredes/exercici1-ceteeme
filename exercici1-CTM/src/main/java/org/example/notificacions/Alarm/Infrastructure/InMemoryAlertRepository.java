@@ -6,6 +6,7 @@ import org.example.notificacions.Alarm.Domain.AlertRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryAlertRepository implements AlertRepository {
     private final Map<String, List<Alert>> alerts = new HashMap<String, List<Alert>>();
@@ -18,9 +19,10 @@ public class InMemoryAlertRepository implements AlertRepository {
     }
 
     @Override
-    public List<Alert> findById(String alarmId){
-        return this.findAll()
-                .stream().filter(e -> alarmId.compareTo(e.getId()));
+    public Optional<Alert> findById(String alarmId){
+        return this.findAll().stream()
+                .filter(e -> alarmId.equals(e.getAlertId()))
+                .findAny();
     }
 
     @Override

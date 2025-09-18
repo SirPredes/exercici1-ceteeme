@@ -9,15 +9,15 @@ public class Alert {
     private String alertId;
     private Date alertDate;
 
-    private Busline busline;
-    private BusStop busStop;
+    private String buslineId;
+    private String busStopId;
     private String description;
 
-    public Alert(String alertId, Date alertDate, Busline busline, BusStop busStop, String description) {
+    public Alert(String alertId, Date alertDate, String buslineId, String busStopId, String description) {
         this.alertId = alertId;
         this.alertDate = alertDate;
-        this.busline = busline;
-        this.busStop = busStop;
+        this.buslineId = buslineId;
+        this.busStopId = busStopId;
         this.description = description;
     }
 
@@ -37,20 +37,20 @@ public class Alert {
         this.alertDate = alertDate;
     }
 
-    public Busline getBusline() {
-        return busline;
+    public String getBuslineId() {
+        return buslineId;
     }
 
-    public void setBusline(Busline busline) {
-        this.busline = busline;
+    public void setBuslineId(String buslineId) {
+        this.buslineId = buslineId;
     }
 
-    public BusStop getBusStop() {
-        return busStop;
+    public String getBusStopId() {
+        return busStopId;
     }
 
-    public void setBusStop(BusStop busStop) {
-        this.busStop = busStop;
+    public void setBusStopId(String busStopId) {
+        this.busStopId = busStopId;
     }
 
     public String getDescription() {

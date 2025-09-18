@@ -7,14 +7,16 @@ import java.util.*;
 
 public class Busline {
     private final String lineId;
+    private final String name;
     private String origin;
     private String destination;
     private Schedule schedule;
 
     private BusType busType;
 
-    public Busline(String lineId, String origin, String destination, Schedule schedule, BusType busType) {
+    public Busline(String lineId, String name, String origin, String destination, Schedule schedule, BusType busType) {
         this.lineId = lineId;
+        this.name = name;
         this.origin = origin;
         this.destination = destination;
         this.schedule = schedule;
@@ -35,6 +37,10 @@ public class Busline {
 
     public String getDestination() {
         return destination;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public String getCurrentTimetableURL() {

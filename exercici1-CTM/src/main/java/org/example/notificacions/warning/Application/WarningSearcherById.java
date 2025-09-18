@@ -1,0 +1,26 @@
+package org.example.notificacions.warning.Application;
+
+import org.example.notificacions.warning.Domain.Warning;
+import org.example.notificacions.warning.Domain.WarningRepository;
+
+import java.util.Optional;
+
+public class WarningSearcherById {
+    private final WarningRepository repository;
+
+    public WarningSearcherById(WarningRepository repository){
+        this.repository = repository;
+    }
+
+    public Warning search(String id){
+        Optional<Warning> warningOpt = repository.findById(id);
+
+        if(warningOpt.isEmpty()){
+            throw new IllegalArgumentException("Warning no encontrado: " + id);
+        }
+
+        Warning warning = warningOpt.get();
+
+        return warning;
+    }
+}

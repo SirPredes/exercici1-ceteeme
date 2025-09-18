@@ -7,7 +7,7 @@ import org.example.transport.Schedule.Domain.Schedule;
 import java.util.*;
 
 public class InMemoryScheduleRepository implements ScheduleRepository{
-    private final Map<String, Object> schedules = new HashMap<>();
+    private final Map<String, Schedule> schedules = new HashMap<>();
 
     @Override
     public void save(Busline line, Schedule schedule) {

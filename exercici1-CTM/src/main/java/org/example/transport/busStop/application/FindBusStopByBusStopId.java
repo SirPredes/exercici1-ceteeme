@@ -5,10 +5,10 @@ import org.example.transport.busStop.domain.BusStopRepository;
 
 import java.util.Optional;
 
-public class FindBusStopByNumber {
+public class FindBusStopByBusStopId {
     private final BusStopRepository busStopRepository;
 
-    public FindBusStopByNumber(BusStopRepository busStopRepository){
+    public FindBusStopByBusStopId(BusStopRepository busStopRepository){
         this.busStopRepository = busStopRepository;
     }
 

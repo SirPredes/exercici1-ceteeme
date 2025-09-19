@@ -3,14 +3,14 @@ package org.example.notificacions.alarm.domain;
 import java.util.Date;
 
 public class Alert {
-    private String alertId;
+    private AlertId alertId;
     private Date alertDate;
 
     private String buslineId;
     private String busStopId;
     private String description;
 
-    public Alert(String alertId, Date alertDate, String buslineId, String busStopId, String description) {
+    public Alert(AlertId alertId, Date alertDate, String buslineId, String busStopId, String description) {
         this.alertId = alertId;
         this.alertDate = alertDate;
         this.buslineId = buslineId;
@@ -19,10 +19,10 @@ public class Alert {
     }
 
     public String getAlertId() {
-        return alertId;
+        return alertId.value();
     }
 
-    public void setAlertId(String alertId) {
+    public void setAlertId(AlertId alertId) {
         this.alertId = alertId;
     }
 

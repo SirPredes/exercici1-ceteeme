@@ -1,11 +1,11 @@
-package org.example.transport.schedule.domain;
+package org.example.notificacions.alarm.domain;
 
-public class ScheduleId {
+public class AlertId {
     private String value;
 
-    private ScheduleRepository repository;
+    private AlertRepository repository;
 
-    public ScheduleId(String id, ScheduleRepository repository){
+    public AlertId(String id, AlertRepository repository){
         this.createId(id, repository);
     }
 
@@ -13,7 +13,7 @@ public class ScheduleId {
         return value;
     }
 
-    private void createId(String id, ScheduleRepository repository){
+    private void createId(String id, AlertRepository repository){
         if(repository.findById(id).isPresent()){
             this.value = id;
             this.repository = repository;

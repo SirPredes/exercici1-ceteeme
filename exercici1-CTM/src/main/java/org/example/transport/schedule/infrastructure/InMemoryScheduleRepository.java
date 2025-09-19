@@ -17,8 +17,8 @@ public class InMemoryScheduleRepository implements ScheduleRepository{
     }
 
     @Override
-    public Schedule findById(String id){
-        return schedules.get(id);
+    public Optional<Schedule> findById(String id){
+        return Optional.ofNullable(schedules.get(id));
     }
 
     @Override

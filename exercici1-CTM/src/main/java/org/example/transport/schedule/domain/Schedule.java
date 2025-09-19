@@ -23,7 +23,7 @@ public class Schedule {
     }
 
     public String getBuslineId() {
-        return buslineId.value();
+        return buslineId;
     }
 
     public String getScheduleId(){

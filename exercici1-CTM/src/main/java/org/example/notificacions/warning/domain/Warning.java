@@ -3,7 +3,7 @@ package org.example.notificacions.warning.domain;
 import java.util.Date;
 
 public class Warning {
-    private String warningId;
+    private WarningId warningId;
     private Date warningDate;
     private Date targetDate;
 
@@ -13,7 +13,7 @@ public class Warning {
 
     private String description;
 
-    public Warning(String warningId, Date warningDate, Date targetDate, String buslineId, String busStopId, String direction, String description) {
+    public Warning(WarningId warningId, Date warningDate, Date targetDate, String buslineId, String busStopId, String direction, String description) {
         this.warningId = warningId;
         this.warningDate = warningDate;
         this.targetDate = targetDate;
@@ -24,10 +24,10 @@ public class Warning {
     }
 
     public String getWarningId() {
-        return warningId;
+        return warningId.value();
     }
 
-    public void setWarningId(String warningId) {
+    public void setWarningId(WarningId warningId) {
         this.warningId = warningId;
     }
 

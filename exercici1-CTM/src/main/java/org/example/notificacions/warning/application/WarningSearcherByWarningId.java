@@ -5,10 +5,10 @@ import org.example.notificacions.warning.domain.WarningRepository;
 
 import java.util.Optional;
 
-public class WarningSearcherById {
+public class WarningSearcherByWarningId {
     private final WarningRepository repository;
 
-    public WarningSearcherById(WarningRepository repository){
+    public WarningSearcherByWarningId(WarningRepository repository){
         this.repository = repository;
     }
 

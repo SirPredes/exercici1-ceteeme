@@ -15,7 +15,7 @@ public class InMemoryBusStopRepository implements BusStopRepository {
     }
 
     @Override
-    public Optional<BusStop> findByNumber(String stopId){
+    public Optional<BusStop> findByBusStopId(String stopId){
         return Optional.ofNullable(busStops.get(stopId));
     }
 

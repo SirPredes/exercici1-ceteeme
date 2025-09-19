@@ -6,15 +6,17 @@ import org.example.transport.schedule.domain.Schedule;
 import java.util.*;
 
 public class Busline {
-    private final String lineId;
+    private final BuslineId lineId;
     private final String name;
+
     private String origin;
     private String destination;
+
     private Schedule schedule;
 
     private BusType busType;
 
-    public Busline(String lineId, String name, String origin, String destination, Schedule schedule, BusType busType) {
+    public Busline(BuslineId lineId, String name, String origin, String destination, Schedule schedule, BusType busType) {
         this.lineId = lineId;
         this.name = name;
         this.origin = origin;
@@ -24,7 +26,7 @@ public class Busline {
     }
 
     public String getBuslineId() {
-        return lineId;
+        return lineId.value();
     }
 
     public Schedule getSchedule() {

@@ -5,10 +5,10 @@ import org.example.notificacions.alarm.domain.AlertRepository;
 
 import java.util.Optional;
 
-public class AlertSearcherById {
+public class AlertSearcherByAlarmId {
     private final AlertRepository repository;
 
-    public AlertSearcherById(AlertRepository repository){
+    public AlertSearcherByAlarmId(AlertRepository repository){
         this.repository = repository;
     }
 

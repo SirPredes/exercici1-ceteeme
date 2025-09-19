@@ -7,5 +7,6 @@ public interface WarningRepository {
     Optional<Warning> findById(String id);
     List<Warning> findAll();
     List<Warning> findAlarmByBusline(String lineId);
-    void save(Warning warning);
+    WarningId verifiedWarningId(String id);
+    void save(String id, Warning warning);
 }

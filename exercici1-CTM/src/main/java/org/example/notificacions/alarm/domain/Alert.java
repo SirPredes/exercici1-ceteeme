@@ -18,8 +18,8 @@ public class Alert {
         this.description = description;
     }
 
-    public String getAlertId() {
-        return alertId.value();
+    public AlertId getAlertId() {
+        return alertId;
     }
 
     public void setAlertId(AlertId alertId) {

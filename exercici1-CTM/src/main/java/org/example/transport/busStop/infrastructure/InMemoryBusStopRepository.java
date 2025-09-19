@@ -1,6 +1,7 @@
 package org.example.transport.busStop.infrastructure;
 
 import org.example.transport.busStop.domain.BusStop;
+import org.example.transport.busStop.domain.BusStopId;
 import org.example.transport.busStop.domain.BusStopRepository;
 
 
@@ -20,7 +21,21 @@ public class InMemoryBusStopRepository implements BusStopRepository {
     }
 
     @Override
+    public BusStopId verifiedBusStopId(String id){
+        Optional<BusStop> busStop = this.findByBusStopId(id);
+        BusStopId verifiedBusStopId;
+
+        if(busStop.isEmpty()){
+            verifiedBusStopId = new BusStopId(id, this);
+        }else{
+            verifiedBusStopId = busStop.get().getStopId();
+        }
+
+        return verifiedBusStopId;
+    }
+
+    @Override
     public void save(BusStop stop){
-        busStops.put(stop.getStopId(), stop);
+        busStops.put(stop.getStopId().value(), stop);
     }
 }

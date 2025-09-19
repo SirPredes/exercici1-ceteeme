@@ -10,8 +10,8 @@ import org.example.transport.schedule.domain.ScheduleRepository;
 import java.util.List;
 
 public class ScheduleCreator {
-    private ScheduleRepository scheduleRepo;
-    private BuslineRepository buslineRepo;
+    private final ScheduleRepository scheduleRepo;
+    private final BuslineRepository buslineRepo;
 
     public ScheduleCreator(ScheduleRepository scheduleRepo, BuslineRepository buslineRepo){
         this.scheduleRepo = scheduleRepo;
@@ -19,13 +19,9 @@ public class ScheduleCreator {
     }
 
     public void create(String buslineId, String scheduleId, List<BusStop> busStopList, String TimeTable){
-        BuslineId verifiedBuslineId = buslineRepo.findById(buslineId)
-                                            .get()
-                                            .getBuslineId();
-        if(verifiedBuslineId == null){
-            verifiedBuslineId = new BuslineId(buslineId, buslineRepo);
-        }
-        ScheduleId verifiedScheduleId = new ScheduleId(scheduleId, scheduleRepo);
+        BuslineId verifiedBuslineId = buslineRepo.verifiedBuslineId(buslineId);
+        ScheduleId verifiedScheduleId = scheduleRepo.verifiedScheduleId(scheduleId);
+
         Schedule newSchedule = new Schedule(verifiedBuslineId, verifiedScheduleId, TimeTable, busStopList);
 
         scheduleRepo.save(verifiedBuslineId.value(), newSchedule);

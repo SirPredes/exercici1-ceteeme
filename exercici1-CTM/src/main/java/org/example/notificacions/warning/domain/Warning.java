@@ -23,8 +23,8 @@ public class Warning {
         this.description = description;
     }
 
-    public String getWarningId() {
-        return warningId.value();
+    public WarningId getWarningId() {
+        return warningId;
     }
 
     public void setWarningId(WarningId warningId) {

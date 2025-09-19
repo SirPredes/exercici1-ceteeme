@@ -7,6 +7,7 @@ public interface AlertRepository {
     Optional<Alert> findById(String id);
     List<Alert> findAll();
     List<Alert> findAlarmByBusline(String lineId);
-    void save(Alert alert);
+    AlertId verifiedAlertId(String id);
+    void save(String id, Alert alert);
 
 }

@@ -6,5 +6,6 @@ import java.util.Optional;
 public interface ScheduleRepository {
     List<Schedule> allSchedules();
     Optional<Schedule> findById(String id);
+    ScheduleId verifiedScheduleId(String id);
     void save(String line, Schedule schedule);
 }

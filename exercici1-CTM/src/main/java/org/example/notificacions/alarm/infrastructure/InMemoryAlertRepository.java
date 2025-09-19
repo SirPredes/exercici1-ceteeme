@@ -1,6 +1,7 @@
 package org.example.notificacions.alarm.infrastructure;
 
 import org.example.notificacions.alarm.domain.Alert;
+import org.example.notificacions.alarm.domain.AlertId;
 import org.example.notificacions.alarm.domain.AlertRepository;
 
 import java.util.HashMap;
@@ -31,7 +32,22 @@ public class InMemoryAlertRepository implements AlertRepository {
     }
 
     @Override
-    public void save(Alert alert){
-        //TODO: Implement it in the domain
+    public AlertId verifiedAlertId(String id){
+        Optional<Alert> alert = this.findById(id);
+        AlertId verifiedAlertId;
+
+        if(alert.isEmpty()){
+            verifiedAlertId = new AlertId(id, this);
+        }else{
+            verifiedAlertId = alert.get().getAlertId();
+        }
+
+        return verifiedAlertId;
+    }
+
+    @Override
+    public void save(String id, Alert alert){
+        alerts.get(id)
+                .add(alert);
     }
 }

@@ -23,12 +23,12 @@ public class Schedule {
         this.previousTimetableURL = new ArrayList<>();
     }
 
-    public String getBuslineId() {
-        return buslineId.value();
+    public BuslineId getBuslineId() {
+        return buslineId;
     }
 
-    public String getScheduleId(){
-        return scheduleId.value();
+    public ScheduleId getScheduleId(){
+        return scheduleId;
     }
 
     public List<BusStop> getBusStopList() {

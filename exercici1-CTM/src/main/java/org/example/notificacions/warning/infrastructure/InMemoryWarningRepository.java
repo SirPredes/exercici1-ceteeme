@@ -1,6 +1,7 @@
 package org.example.notificacions.warning.infrastructure;
 
 import org.example.notificacions.warning.domain.Warning;
+import org.example.notificacions.warning.domain.WarningId;
 import org.example.notificacions.warning.domain.WarningRepository;
 
 import java.util.HashMap;
@@ -31,7 +32,21 @@ public class InMemoryWarningRepository implements WarningRepository {
     }
 
     @Override
-    public void save(Warning warning) {
-        //TODO: Implement it in the domain
+    public WarningId verifiedWarningId(String id){
+        Optional<Warning> warning = this.findById(id);
+        WarningId verifiedWarningId;
+
+        if(warning.isEmpty()){
+            verifiedWarningId = new WarningId(id, this);
+        }else{
+            verifiedWarningId = warning.get().getWarningId();
+        }
+
+        return verifiedWarningId;
+    }
+
+    @Override
+    public void save(String id, Warning warning) {
+        warnings.get(id).add(warning);
     }
 }

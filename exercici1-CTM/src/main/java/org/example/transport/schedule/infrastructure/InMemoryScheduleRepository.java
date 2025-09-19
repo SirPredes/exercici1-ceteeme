@@ -1,6 +1,7 @@
 package org.example.transport.schedule.infrastructure;
 
 import org.example.transport.schedule.domain.Schedule;
+import org.example.transport.schedule.domain.ScheduleId;
 import org.example.transport.schedule.domain.ScheduleRepository;
 
 import java.util.HashMap;
@@ -23,9 +24,21 @@ public class InMemoryScheduleRepository implements ScheduleRepository{
         return Optional.ofNullable(schedules.get(id));
     }
 
+    public ScheduleId verifiedScheduleId(String id){
+        Optional<Schedule> schedule = this.findById(id);
+        ScheduleId verifiedScheduleId;
+
+        if(schedule.isEmpty()){
+            verifiedScheduleId = new ScheduleId(id, this);
+        }else{
+            verifiedScheduleId = schedule.get().getScheduleId();
+        }
+
+        return verifiedScheduleId;
+    }
+
     @Override
     public void save(String line, Schedule schedule) {
-        //TODO: Aixo es una prova pero s'ha de refer segurament a nivell de domini
         schedules.put(line, schedule);
     }
 }

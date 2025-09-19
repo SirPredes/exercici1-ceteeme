@@ -9,5 +9,6 @@ public interface BuslineRepository {
     Optional<Busline> findById(String id);
     List<Busline> findAll();
     Schedule findScheduleByBusline(String lineId);
+    BuslineId verifiedBuslineId(String id);
     void save(Busline line);
 }

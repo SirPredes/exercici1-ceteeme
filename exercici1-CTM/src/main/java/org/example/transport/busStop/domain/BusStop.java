@@ -17,8 +17,8 @@ public class BusStop {
         this.lines = lines;
     }
 
-    public String getStopId() {
-        return stopId.value();
+    public BusStopId getStopId() {
+        return stopId;
     }
 
     public String getAddress() {

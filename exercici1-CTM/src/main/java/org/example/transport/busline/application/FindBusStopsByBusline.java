@@ -1,0 +1,30 @@
+package org.example.transport.busline.application;
+
+import org.example.transport.busStop.domain.BusStop;
+import org.example.transport.busStop.domain.BusStopRepository;
+import org.example.transport.busline.domain.Busline;
+import org.example.transport.busline.domain.BuslineRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public class FindBusStopsByBusline {
+    private final BuslineRepository lineRepo;
+
+    public FindBusStopsByBusline(BusStopRepository stopRepo, BuslineRepository lineRepo){
+        this.lineRepo = lineRepo;
+    }
+
+    public List<BusStop> search(String line){
+
+        Optional<Busline> lineaOpt = lineRepo.findById(line);
+
+        if (lineaOpt.isEmpty()) {
+            throw new IllegalArgumentException("Línea no encontrada: " + line);
+        }
+
+        Busline linea = lineaOpt.get();
+
+        return linea.getBusStops();
+    }
+}

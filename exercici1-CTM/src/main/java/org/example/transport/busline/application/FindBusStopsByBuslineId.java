@@ -8,10 +8,10 @@ import org.example.transport.busline.domain.BuslineRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class FindBusStopsByBusline {
+public class FindBusStopsByBuslineId {
     private final BuslineRepository lineRepo;
 
-    public FindBusStopsByBusline(BusStopRepository stopRepo, BuslineRepository lineRepo){
+    public FindBusStopsByBuslineId(BusStopRepository stopRepo, BuslineRepository lineRepo){
         this.lineRepo = lineRepo;
     }
 

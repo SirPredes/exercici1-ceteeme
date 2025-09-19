@@ -1,4 +1,4 @@
-package org.example.transport.schedule.application;
+package org.example.transport.schedule.application.find;
 
 import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleRepository;

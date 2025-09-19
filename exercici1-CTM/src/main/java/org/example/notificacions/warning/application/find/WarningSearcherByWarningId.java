@@ -1,4 +1,4 @@
-package org.example.notificacions.warning.application;
+package org.example.notificacions.warning.application.find;
 
 import org.example.notificacions.warning.domain.Warning;
 import org.example.notificacions.warning.domain.WarningRepository;

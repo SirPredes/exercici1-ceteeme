@@ -1,12 +1,13 @@
 package org.example.transport.schedule.domain;
 
 import org.example.transport.busStop.domain.BusStop;
+import org.example.transport.busline.domain.BuslineId;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Schedule {
-    private String buslineId;
+    private BuslineId buslineId;
     private ScheduleId scheduleId;
 
     private List<BusStop> busStopList;
@@ -14,7 +15,7 @@ public class Schedule {
     private String currentTimetableURL;
     private List<String> previousTimetableURL;
 
-    public Schedule(String buslineId, ScheduleId scheduleId, String currentTimetableURL, List<BusStop> busStopList) {
+    public Schedule(BuslineId buslineId, ScheduleId scheduleId, String currentTimetableURL, List<BusStop> busStopList) {
         this.buslineId = buslineId;
         this.scheduleId = scheduleId;
         this.currentTimetableURL = currentTimetableURL;
@@ -23,7 +24,7 @@ public class Schedule {
     }
 
     public String getBuslineId() {
-        return buslineId;
+        return buslineId.value();
     }
 
     public String getScheduleId(){

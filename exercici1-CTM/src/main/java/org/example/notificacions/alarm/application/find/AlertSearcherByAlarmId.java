@@ -1,4 +1,4 @@
-package org.example.notificacions.alarm.application;
+package org.example.notificacions.alarm.application.find;
 
 import org.example.notificacions.alarm.domain.Alert;
 import org.example.notificacions.alarm.domain.AlertRepository;

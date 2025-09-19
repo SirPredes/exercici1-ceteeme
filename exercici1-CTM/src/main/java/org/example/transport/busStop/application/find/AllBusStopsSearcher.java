@@ -1,4 +1,4 @@
-package org.example.transport.busStop.application;
+package org.example.transport.busStop.application.find;
 
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.busStop.domain.BusStopRepository;

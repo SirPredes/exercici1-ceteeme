@@ -25,8 +25,8 @@ public class Busline {
         this.busType = busType;
     }
 
-    public String getBuslineId() {
-        return lineId.value();
+    public BuslineId getBuslineId() {
+        return lineId;
     }
 
     public Schedule getSchedule() {

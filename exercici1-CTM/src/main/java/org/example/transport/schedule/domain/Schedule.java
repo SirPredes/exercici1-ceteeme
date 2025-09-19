@@ -7,21 +7,27 @@ import java.util.List;
 
 public class Schedule {
     private String buslineId;
+    private ScheduleId scheduleId;
 
     private List<BusStop> busStopList;
 
     private String currentTimetableURL;
     private List<String> previousTimetableURL;
 
-    public Schedule(String buslineId, String currentTimetableURL, List<BusStop> busStopList) {
+    public Schedule(String buslineId, ScheduleId scheduleId, String currentTimetableURL, List<BusStop> busStopList) {
         this.buslineId = buslineId;
+        this.scheduleId = scheduleId;
         this.currentTimetableURL = currentTimetableURL;
         this.busStopList = busStopList;
         this.previousTimetableURL = new ArrayList<>();
     }
 
     public String getBuslineId() {
-        return buslineId;
+        return buslineId.value();
+    }
+
+    public String getScheduleId(){
+        return scheduleId.value();
     }
 
     public List<BusStop> getBusStopList() {

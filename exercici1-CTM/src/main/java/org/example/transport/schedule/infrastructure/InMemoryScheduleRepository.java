@@ -17,6 +17,11 @@ public class InMemoryScheduleRepository implements ScheduleRepository{
     }
 
     @Override
+    public Schedule findById(String id){
+        return schedules.get(id);
+    }
+
+    @Override
     public void save(Busline line, Schedule schedule) {
         //TODO: Aixo es una prova pero s'ha de refer segurament a nivell de domini
         schedules.put(line.getBuslineId(), schedule);

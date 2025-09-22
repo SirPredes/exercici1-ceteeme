@@ -13,6 +13,6 @@ public class AllAlertSearcher {
     }
 
     public List<Alert> search(){
-        return repository.findAll();
+        return repository.findAllOrderedById();
     }
 }

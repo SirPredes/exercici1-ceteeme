@@ -5,13 +5,16 @@ import org.example.transport.busStop.domain.BusStopId;
 import org.example.transport.busStop.domain.BusStopRepository;
 
 
-import java.util.*;
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.List;
+import java.util.Optional;
 
 public class InMemoryBusStopRepository implements BusStopRepository {
-    private final Map<String, BusStop> busStops = new HashMap<String, BusStop>();
+    private final Map<String, BusStop> busStops = new TreeMap<>();
 
     @Override
-    public List<BusStop> findAll(){
+    public List<BusStop> findAllOrderedById(){
         return busStops.values().stream().toList();
     }
 

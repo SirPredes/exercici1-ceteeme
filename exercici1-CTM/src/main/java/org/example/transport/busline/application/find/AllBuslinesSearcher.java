@@ -13,6 +13,6 @@ public class AllBuslinesSearcher {
     }
 
     public List<Busline> search(){
-        return repository.findAll();
+        return repository.findAllOrderedById();
     }
 }

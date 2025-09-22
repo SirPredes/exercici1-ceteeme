@@ -13,6 +13,6 @@ public class AllWarningSearcher {
     }
 
     public List<Warning> search(){
-        return repository.findAll();
+        return repository.findAllOrderedById();
     }
 }

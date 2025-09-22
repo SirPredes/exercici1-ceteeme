@@ -4,16 +4,13 @@ import org.example.notificacions.alarm.domain.Alert;
 import org.example.notificacions.alarm.domain.AlertId;
 import org.example.notificacions.alarm.domain.AlertRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class InMemoryAlertRepository implements AlertRepository {
-    private final Map<String, List<Alert>> alerts = new HashMap<String, List<Alert>>();
+    private final Map<String, List<Alert>> alerts = new TreeMap<>();
 
     @Override
-    public List<Alert> findAll(){
+    public List<Alert> findAllOrderedById(){
         return alerts.values().stream()
                 .flatMap(List::stream)
                 .toList();
@@ -21,8 +18,8 @@ public class InMemoryAlertRepository implements AlertRepository {
 
     @Override
     public Optional<Alert> findById(String alarmId){
-        return this.findAll().stream()
-                .filter(e -> alarmId.equals(e.getAlertId()))
+        return this.findAllOrderedById().stream()
+                .filter(e -> e.getAlertId().value().equals(alarmId))
                 .findAny();
     }
 
@@ -47,7 +44,7 @@ public class InMemoryAlertRepository implements AlertRepository {
 
     @Override
     public void save(String id, Alert alert){
-        alerts.get(id)
+        alerts.computeIfAbsent(id, k -> new ArrayList<>())
                 .add(alert);
     }
 }

@@ -4,16 +4,16 @@ import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleId;
 import org.example.transport.schedule.domain.ScheduleRepository;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class InMemoryScheduleRepository implements ScheduleRepository{
-    private final Map<String, Schedule> schedules = new HashMap<>();
+    private final Map<String, Schedule> schedules = new TreeMap<>();
 
     @Override
-    public List<Schedule> allSchedules(){
+    public List<Schedule> findAllOrderedById(){
         return schedules.values()
                 .stream()
                 .toList();
@@ -21,7 +21,9 @@ public class InMemoryScheduleRepository implements ScheduleRepository{
 
     @Override
     public Optional<Schedule> findById(String id){
-        return Optional.ofNullable(schedules.get(id));
+        return this.findAllOrderedById().stream()
+                .filter(s -> s.getScheduleId().value().equals(id))
+                .findAny();
     }
 
     public ScheduleId verifiedScheduleId(String id){

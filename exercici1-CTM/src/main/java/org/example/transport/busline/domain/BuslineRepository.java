@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface BuslineRepository {
     Optional<Busline> findById(String id);
-    List<Busline> findAll();
+    List<Busline> findAllOrderedById();
     Schedule findScheduleByBusline(String lineId);
     BuslineId verifiedBuslineId(String id);
     void save(Busline line);

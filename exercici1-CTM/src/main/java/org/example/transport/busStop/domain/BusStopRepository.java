@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface BusStopRepository {
     Optional<BusStop> findByBusStopId(String BusStopId);
-    List<BusStop> findAll();
+    List<BusStop> findAllOrderedById();
     BusStopId verifiedBusStopId(String id);
     void save(BusStop stop);
 }

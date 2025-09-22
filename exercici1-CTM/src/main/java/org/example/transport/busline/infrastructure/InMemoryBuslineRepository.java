@@ -5,14 +5,14 @@ import org.example.transport.busline.domain.BuslineId;
 import org.example.transport.busline.domain.BuslineRepository;
 import org.example.transport.schedule.domain.Schedule;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 
 public class InMemoryBuslineRepository implements BuslineRepository {
-    private final HashMap<String, Busline> buslines = new HashMap<String, Busline>();
+    private final Map<String, Busline> buslines = new TreeMap<String, Busline>();
 
     @Override
     public Optional<Busline> findById(String id) {
@@ -20,8 +20,9 @@ public class InMemoryBuslineRepository implements BuslineRepository {
     }
 
     @Override
-    public List<Busline> findAll() {
-        return new ArrayList<>(buslines.values());
+    public List<Busline> findAllOrderedById() {
+        return buslines.values().stream()
+                .toList();
     }
 
     @Override

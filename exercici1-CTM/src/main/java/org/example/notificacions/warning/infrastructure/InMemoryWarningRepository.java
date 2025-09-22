@@ -4,16 +4,13 @@ import org.example.notificacions.warning.domain.Warning;
 import org.example.notificacions.warning.domain.WarningId;
 import org.example.notificacions.warning.domain.WarningRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class InMemoryWarningRepository implements WarningRepository {
-    private final Map<String, List<Warning>> warnings = new HashMap<String, List<Warning>>();
+    private final Map<String, List<Warning>> warnings = new TreeMap<>();
 
     @Override
-    public List<Warning> findAll() {
+    public List<Warning> findAllOrderedById() {
         return warnings.values().stream()
                 .flatMap(List::stream)
                 .toList();
@@ -21,8 +18,8 @@ public class InMemoryWarningRepository implements WarningRepository {
 
     @Override
     public Optional<Warning> findById(String warningId) {
-        return this.findAll().stream()
-                .filter(w -> warningId.equals(w.getWarningId()))
+        return this.findAllOrderedById().stream()
+                .filter(w -> w.getWarningId().value().equals(warningId))
                 .findAny();
     }
 
@@ -46,7 +43,8 @@ public class InMemoryWarningRepository implements WarningRepository {
     }
 
     @Override
-    public void save(String id, Warning warning) {
-        warnings.get(id).add(warning);
+    public void save(String buslineId, Warning warning) {
+        warnings.computeIfAbsent(buslineId, k -> new ArrayList<>())
+                .add(warning);
     }
 }

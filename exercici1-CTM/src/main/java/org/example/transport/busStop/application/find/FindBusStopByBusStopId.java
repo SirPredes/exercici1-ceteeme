@@ -13,6 +13,6 @@ public class FindBusStopByBusStopId {
     }
 
     public Optional<BusStop> search(String number){
-        return busStopRepository.findByNumber(number);
+        return busStopRepository.findByBusStopId(number);
     }
 }

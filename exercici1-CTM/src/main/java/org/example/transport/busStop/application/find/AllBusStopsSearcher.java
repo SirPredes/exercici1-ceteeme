@@ -13,6 +13,6 @@ public class AllBusStopsSearcher {
     }
 
     public List<BusStop> search(){
-        return repository.findAll();
+        return repository.findAllOrderedById();
     }
 }

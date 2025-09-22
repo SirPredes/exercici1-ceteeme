@@ -1,5 +1,6 @@
 package org.example.transport.busline.infrastructure;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.example.transport.busline.domain.Busline;
 import org.example.transport.busline.domain.BuslineId;
 import org.example.transport.busline.domain.BuslineRepository;
@@ -10,9 +11,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
-
+@ApplicationScoped
 public class InMemoryBuslineRepository implements BuslineRepository {
     private final Map<String, Busline> buslines = new TreeMap<String, Busline>();
+
+    public InMemoryBuslineRepository(){}
 
     @Override
     public Optional<Busline> findById(String id) {

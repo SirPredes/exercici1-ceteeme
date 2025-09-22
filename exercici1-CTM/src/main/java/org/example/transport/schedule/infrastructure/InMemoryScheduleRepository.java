@@ -1,5 +1,6 @@
 package org.example.transport.schedule.infrastructure;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleId;
 import org.example.transport.schedule.domain.ScheduleRepository;
@@ -9,8 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@ApplicationScoped
 public class InMemoryScheduleRepository implements ScheduleRepository{
     private final Map<String, Schedule> schedules = new TreeMap<>();
+
+    public InMemoryScheduleRepository(){}
 
     @Override
     public List<Schedule> findAllOrderedById(){

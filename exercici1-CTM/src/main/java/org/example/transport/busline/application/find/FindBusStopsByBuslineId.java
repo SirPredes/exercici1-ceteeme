@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FindBusStopsByBuslineId {
-    private final BuslineRepository lineRepo;
+    private BuslineRepository lineRepo;
 
     public FindBusStopsByBuslineId(BusStopRepository stopRepo, BuslineRepository lineRepo){
         this.lineRepo = lineRepo;

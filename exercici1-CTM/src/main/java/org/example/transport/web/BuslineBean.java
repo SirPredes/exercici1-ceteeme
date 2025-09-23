@@ -69,7 +69,11 @@ public class BuslineBean implements Serializable {
                 name,
                 origin,
                 destination,
+<<<<<<< HEAD
                 findScheduleByScheduleId.search(scheduleId).get(),
+=======
+                findScheduleByScheduleId.search(scheduleId),
+>>>>>>> 5937c9f6884189b56b4c8bbbc7381cf029e6c973
                 busType
         );
         buslines = allBuslinesSearcher.search();

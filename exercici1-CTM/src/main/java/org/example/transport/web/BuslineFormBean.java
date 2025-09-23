@@ -1,33 +1,20 @@
 package org.example.transport.web;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.example.transport.busline.application.create.BuslineCreator;
-import org.example.transport.busline.application.find.AllBuslinesSearcher;
 import org.example.transport.busline.domain.BusType;
-import org.example.transport.busline.domain.Busline;
 import org.example.transport.schedule.application.create.ScheduleCreator;
 import org.example.transport.schedule.application.find.AllSchedulesSearcher;
 import org.example.transport.schedule.application.find.FindScheduleByScheduleId;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-@Named("buslineBean")
-@ApplicationScoped
-public class BuslineBean implements Serializable {
-
-    @Inject
-    private AllBuslinesSearcher allBuslinesSearcher;
-
-    @Inject
-    private AllSchedulesSearcher allSchedulesSearcher;
-
-    @Inject
-    private FindScheduleByScheduleId findScheduleByScheduleId;
+@Named("buslineFormBean")
+@RequestScoped
+public class BuslineFormBean implements Serializable {
 
     @Inject
     private BuslineCreator buslineCreator;
@@ -35,34 +22,23 @@ public class BuslineBean implements Serializable {
     @Inject
     private ScheduleCreator scheduleCreator;
 
-    private List<Busline> buslines;
+    @Inject
+    private AllSchedulesSearcher allSchedulesSearcher;
 
-    // Campos del formulario
+    @Inject
+    private FindScheduleByScheduleId findScheduleByScheduleId;
+
     private String lineId;
     private String name;
     private String origin;
     private String destination;
     private BusType busType;
 
-    // Control de filas en la tabla
-    private int rows = 20;
-
-    @PostConstruct
-    public void init() {
-        buslines = allBuslinesSearcher.search();
-    }
-
     public void createBusline() {
         int oldScheduleId = Integer.parseInt(allSchedulesSearcher.search().getLast().getScheduleId().value());
-        Integer newScheduleId = oldScheduleId + 1;
-        String scheduleId = newScheduleId.toString();
+        String scheduleId = String.valueOf(oldScheduleId + 1);
 
-        scheduleCreator.create(
-                lineId,
-                scheduleId,
-                new ArrayList<>(),
-                ""
-        );
+        scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
 
         buslineCreator.create(
                 lineId,
@@ -72,7 +48,7 @@ public class BuslineBean implements Serializable {
                 findScheduleByScheduleId.search(scheduleId).get(),
                 busType
         );
-        buslines = allBuslinesSearcher.search();
+
         clearForm();
     }
 
@@ -82,8 +58,6 @@ public class BuslineBean implements Serializable {
     }
 
     // Getters y setters
-    public List<Busline> getBuslines() { return buslines; }
-
     public String getLineId() { return lineId; }
     public void setLineId(String lineId) { this.lineId = lineId; }
 
@@ -98,7 +72,4 @@ public class BuslineBean implements Serializable {
 
     public BusType getBusType() { return busType; }
     public void setBusType(BusType busType) { this.busType = busType; }
-
-    public int getRows() { return rows; }
-    public void setRows(int rows) { this.rows = rows; }
 }

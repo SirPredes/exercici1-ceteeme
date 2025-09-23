@@ -1,6 +1,6 @@
 package org.example.transport.busline.application.create;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import org.example.transport.busline.domain.BusType;
 import org.example.transport.busline.domain.Busline;
@@ -8,7 +8,7 @@ import org.example.transport.busline.domain.BuslineId;
 import org.example.transport.busline.domain.BuslineRepository;
 import org.example.transport.schedule.domain.Schedule;
 
-@ApplicationScoped
+@Dependent
 public class BuslineCreator {
     private BuslineRepository repository;
 

@@ -1,15 +1,15 @@
 package org.example.transport.schedule.application.find;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleRepository;
 
 import java.util.List;
 
-@ApplicationScoped
+@Dependent
 public class AllSchedulesSearcher {
-    private final ScheduleRepository repository;
+    private ScheduleRepository repository;
 
     @Inject
     public AllSchedulesSearcher(ScheduleRepository repository){

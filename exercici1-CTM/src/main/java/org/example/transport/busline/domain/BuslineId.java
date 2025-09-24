@@ -22,7 +22,7 @@ public class BuslineId implements Serializable {
     }
 
     private void createId(String id, BuslineRepository repository){
-        if(repository.findById(id).isEmpty()){
+        if(!repository.findById(id).isPresent()){
             this.value = id;
             this.repository = repository;
         }else{

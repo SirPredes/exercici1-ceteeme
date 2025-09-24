@@ -1,5 +1,7 @@
 package org.example.transport.web;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -49,16 +51,31 @@ public class BuslineFormBean implements Serializable {
         }
         String scheduleId = String.valueOf(oldScheduleId + 1);
 
-        scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
+        try{
+            scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
 
-        buslineCreator.create(
-                lineId,
-                name,
-                origin,
-                destination,
-                findScheduleByScheduleId.search(scheduleId).get(),
-                busType
-        );
+            buslineCreator.create(
+                    lineId,
+                    name,
+                    origin,
+                    destination,
+                    findScheduleByScheduleId.search(scheduleId).get(),
+                    busType
+            );
+
+            FacesContext.getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Línea creada correctamente", null)
+                    );
+
+        }catch(IllegalArgumentException e){
+            FacesContext.getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear línea", e.getMessage())
+                    );
+        }
 
         buslineTableBean.reload();
         clearForm();

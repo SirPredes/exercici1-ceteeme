@@ -31,16 +31,7 @@ public class InMemoryScheduleRepository implements ScheduleRepository{
     }
 
     public ScheduleId verifiedScheduleId(String id){
-        Optional<Schedule> schedule = this.findById(id);
-        ScheduleId verifiedScheduleId;
-
-        if(schedule.isEmpty()){
-            verifiedScheduleId = new ScheduleId(id, this);
-        }else{
-            verifiedScheduleId = schedule.get().getScheduleId();
-        }
-
-        return verifiedScheduleId;
+        return new ScheduleId(id, this);
     }
 
     @Override

@@ -80,9 +80,9 @@
 
             <p:commandButton value="Crear Línea" action="#{buslineFormBean.createBusline}"
                              update="@form" icon="pi pi-plus" style="margin-top">
-
             </p:commandButton>
 
+            <p:growl id="growl" showDetail="true" life="4000" />
             <!--
             <ui:include src="/templates/bus_header.xhtml"/>
             <ui:include src="/templates/buslines_table.xhtml"/>

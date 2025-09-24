@@ -25,16 +25,7 @@ public class InMemoryBusStopRepository implements BusStopRepository {
 
     @Override
     public BusStopId verifiedBusStopId(String id){
-        Optional<BusStop> busStop = this.findByBusStopId(id);
-        BusStopId verifiedBusStopId;
-
-        if(busStop.isEmpty()){
-            verifiedBusStopId = new BusStopId(id, this);
-        }else{
-            verifiedBusStopId = busStop.get().getStopId();
-        }
-
-        return verifiedBusStopId;
+        return new BusStopId(id, this);
     }
 
     @Override

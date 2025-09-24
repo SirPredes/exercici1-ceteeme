@@ -30,6 +30,9 @@ public class BuslineFormBean implements Serializable {
     @Inject
     private FindScheduleByScheduleId findScheduleByScheduleId;
 
+    @Inject
+    private BuslineTableBean buslineTableBean;
+
     private String lineId;
     private String name;
     private String origin;
@@ -57,6 +60,7 @@ public class BuslineFormBean implements Serializable {
                 busType
         );
 
+        buslineTableBean.reload();
         clearForm();
     }
 

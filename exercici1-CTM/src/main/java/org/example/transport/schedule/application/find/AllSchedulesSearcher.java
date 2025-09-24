@@ -5,10 +5,13 @@ import jakarta.inject.Inject;
 import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleRepository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Dependent
-public class AllSchedulesSearcher {
+public class AllSchedulesSearcher implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private ScheduleRepository repository;
 
     @Inject

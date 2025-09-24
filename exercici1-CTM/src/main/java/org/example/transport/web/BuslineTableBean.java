@@ -1,7 +1,7 @@
 package org.example.transport.web;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.example.transport.busline.application.find.AllBuslinesSearcher;
@@ -11,14 +11,14 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named("buslineTableBean")
-@RequestScoped
+@ViewScoped
 public class BuslineTableBean implements Serializable {
 
     @Inject
     private AllBuslinesSearcher allBuslinesSearcher;
 
     private List<Busline> buslines;
-    private int rows = 20;
+    private int rows = 10;
 
     @PostConstruct
     public void init() {
@@ -35,5 +35,9 @@ public class BuslineTableBean implements Serializable {
 
     public void setRows(int rows) {
         this.rows = rows;
+    }
+
+    public void reload(){
+        buslines = allBuslinesSearcher.search();
     }
 }

@@ -17,6 +17,10 @@ public class BuslineId implements Serializable {
         return value;
     }
 
+    public String getValue(){
+        return value;
+    }
+
     private void createId(String id, BuslineRepository repository){
         if(repository.findById(id).isEmpty()){
             this.value = id;
@@ -26,3 +30,4 @@ public class BuslineId implements Serializable {
         }
     }
 }
+

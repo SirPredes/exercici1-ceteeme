@@ -98,12 +98,9 @@ public class BuslineFormBean implements Serializable {
 
     public String obtainScheduleId(){
         Optional<Schedule> s= allSchedulesSearcher.search().stream().findAny();
-        int oldScheduleId;
-        if(s.isEmpty()){
-            oldScheduleId = 1;
-        }else{
-            oldScheduleId = Integer.parseInt(s.get().getScheduleId().value());
-        }
+
+        int oldScheduleId = s.map(schedule -> Integer.parseInt(schedule.getScheduleId().value())).orElse(1);
+
         return String.valueOf(oldScheduleId + 1);
     }
 }

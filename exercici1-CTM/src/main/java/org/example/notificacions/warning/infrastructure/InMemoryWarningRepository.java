@@ -30,16 +30,7 @@ public class InMemoryWarningRepository implements WarningRepository {
 
     @Override
     public WarningId verifiedWarningId(String id){
-        Optional<Warning> warning = this.findById(id);
-        WarningId verifiedWarningId;
-
-        if(warning.isEmpty()){
-            verifiedWarningId = new WarningId(id, this);
-        }else{
-            verifiedWarningId = warning.get().getWarningId();
-        }
-
-        return verifiedWarningId;
+        return new WarningId(id, this);
     }
 
     @Override

@@ -30,16 +30,7 @@ public class InMemoryAlertRepository implements AlertRepository {
 
     @Override
     public AlertId verifiedAlertId(String id){
-        Optional<Alert> alert = this.findById(id);
-        AlertId verifiedAlertId;
-
-        if(alert.isEmpty()){
-            verifiedAlertId = new AlertId(id, this);
-        }else{
-            verifiedAlertId = alert.get().getAlertId();
-        }
-
-        return verifiedAlertId;
+        return new AlertId(id, this);
     }
 
     @Override

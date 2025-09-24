@@ -35,16 +35,7 @@ public class InMemoryBuslineRepository implements BuslineRepository {
 
     @Override
     public BuslineId verifiedBuslineId(String id){
-        Optional<Busline> busline = this.findById(id);
-        BuslineId verifiedBuslineId;
-
-        if(busline.isEmpty()){
-            verifiedBuslineId = new BuslineId(id, this);
-        }else{
-            verifiedBuslineId = busline.get().getBuslineId();
-        }
-
-        return verifiedBuslineId;
+        return new BuslineId(id, this);
     }
 
     @Override

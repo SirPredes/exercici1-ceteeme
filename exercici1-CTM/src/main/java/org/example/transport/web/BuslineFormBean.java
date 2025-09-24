@@ -1,5 +1,7 @@
 package org.example.transport.web;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -40,25 +42,33 @@ public class BuslineFormBean implements Serializable {
     private BusType busType;
 
     public void createBusline() {
-        Optional<Schedule> s= allSchedulesSearcher.search().stream().findAny();
-        int oldScheduleId;
-        if(s.isEmpty()){
-            oldScheduleId = 1;
-        }else{
-            oldScheduleId = Integer.parseInt(s.get().getScheduleId().value());
+        String scheduleId = obtainScheduleId();
+
+        try{
+            scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
+
+            buslineCreator.create(
+                    lineId,
+                    name,
+                    origin,
+                    destination,
+                    findScheduleByScheduleId.search(scheduleId).get(),
+                    busType
+            );
+
+            FacesContext.getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Línea creada correctamente", null)
+                    );
+
+        }catch(IllegalArgumentException e){
+            FacesContext.getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear línea", e.getMessage())
+                    );
         }
-        String scheduleId = String.valueOf(oldScheduleId + 1);
-
-        scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
-
-        buslineCreator.create(
-                lineId,
-                name,
-                origin,
-                destination,
-                findScheduleByScheduleId.search(scheduleId).get(),
-                busType
-        );
 
         buslineTableBean.reload();
         clearForm();
@@ -85,4 +95,15 @@ public class BuslineFormBean implements Serializable {
     public BusType getBusType() { return busType; }
     public void setBusType(BusType busType) { this.busType = busType; }
     public BusType[] getBusTypes(){ return BusType.values(); }
+
+    public String obtainScheduleId(){
+        Optional<Schedule> s= allSchedulesSearcher.search().stream().findAny();
+        int oldScheduleId;
+        if(s.isEmpty()){
+            oldScheduleId = 1;
+        }else{
+            oldScheduleId = Integer.parseInt(s.get().getScheduleId().value());
+        }
+        return String.valueOf(oldScheduleId + 1);
+    }
 }

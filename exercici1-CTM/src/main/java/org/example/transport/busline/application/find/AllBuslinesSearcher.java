@@ -5,11 +5,16 @@ import jakarta.inject.Inject;
 import org.example.transport.busline.domain.Busline;
 import org.example.transport.busline.domain.BuslineRepository;
 
+import java.io.Serializable;
 import java.util.List;
 
+//@ApplicationScoped
 @Dependent
-public class AllBuslinesSearcher {
+public class AllBuslinesSearcher implements Serializable {
+    private static final long serialVersionUID = 1L;
     private BuslineRepository repository;
+
+    public AllBuslinesSearcher(){}
 
     @Inject
     public AllBuslinesSearcher(BuslineRepository repository){

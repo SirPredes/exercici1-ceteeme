@@ -14,7 +14,7 @@ public class BusStopId {
     }
 
     private void createId(String id, BusStopRepository repository){
-        if(repository.findByBusStopId(id).isPresent()){
+        if(repository.findByBusStopId(id).isEmpty()){
             this.value = id;
             this.repository = repository;
         }else{

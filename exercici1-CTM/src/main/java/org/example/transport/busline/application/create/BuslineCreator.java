@@ -8,9 +8,14 @@ import org.example.transport.busline.domain.BuslineId;
 import org.example.transport.busline.domain.BuslineRepository;
 import org.example.transport.schedule.domain.Schedule;
 
+import java.io.Serializable;
+
 @Dependent
-public class BuslineCreator {
+public class BuslineCreator implements Serializable {
+    private static final long serialVersionUID = 1L;
     private BuslineRepository repository;
+
+    public BuslineCreator(){}
 
     @Inject
     public BuslineCreator(BuslineRepository repository){

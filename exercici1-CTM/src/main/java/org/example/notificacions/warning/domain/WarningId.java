@@ -14,7 +14,7 @@ public class WarningId {
     }
 
     private void createId(String id, WarningRepository repository){
-        if(repository.findById(id).isPresent()){
+        if(repository.findById(id).isEmpty()){
             this.value = id;
             this.repository = repository;
         }else{

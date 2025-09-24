@@ -3,9 +3,11 @@ package org.example.transport.busline.domain;
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.schedule.domain.Schedule;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Busline {
+public class Busline implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final BuslineId lineId;
     private final String name;
 

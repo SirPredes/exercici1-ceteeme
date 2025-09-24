@@ -1,6 +1,10 @@
 package org.example.transport.schedule.domain;
 
-public class ScheduleId {
+import java.io.Serializable;
+
+public class ScheduleId implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String value;
 
     private ScheduleRepository repository;
@@ -14,7 +18,7 @@ public class ScheduleId {
     }
 
     private void createId(String id, ScheduleRepository repository){
-        if(repository.findById(id).isPresent()){
+        if(repository.findById(id).isEmpty()){
             this.value = id;
             this.repository = repository;
         }else{

@@ -9,11 +9,84 @@
     </h:head>
 
     <h:body>
-        <h:outputText value="Hola Antonio, JSF está funcionando correctamente." />
+        <!--<h:outputText value="Hola Antonio, JSF está funcionando correctamente." />-->
+        <h:form id="headerForm">
+            <p:menubar>
+                <p:graphicImage name="exercici1-CTM/bus.jpg" width="40" style="margin-right:10px"/>
+
+                <p:menuitem value="Línies de Bus" outcome="buslines_index.xhtml" icon="exercici1-CTM/buses.png"/>
+
+                <!--<p:menuitem value="Avisos i Alertes" outcome="alerts.xhtml" icon="exercici1-CTM/campana.png"/> -->
+            </p:menubar>
+        </h:form>
         <h:form id="mainForm">
+            <h2>Llistat de Línies de Autobús</h2>
+
+            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" style="margin-bottom:10px">
+                <p:outputLabel for="rowsPerPage" value="Mostrar:" />
+                <p:selectOneMenu id="rowsPerPage" value="#{buslineTableBean.rows}" style="width:100px">
+                    <f:selectItem itemLabel="20" itemValue="20" />
+                    <f:selectItem itemLabel="50" itemValue="50" />
+                    <f:selectItem itemLabel="Totes" itemValue="#{buslineTableBean.buslines.size()}" />
+                    <p:ajax update="buslineTable" />
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:dataTable id="buslineTable" value="#{buslineTableBean.buslines}" var="line"
+                         paginator="true" rows="#{buslineTableBean.rows}" responsiveLayout="scroll">
+
+                <p:column headerText="Nº">
+                    #{line.buslineId.value}
+                </p:column>
+                <p:column headerText="Nom">
+                    #{line.name}
+                </p:column>
+                <p:column headerText="Orígen">
+                    #{line.origin}
+                </p:column>
+                <p:column headerText="Destí">
+                    #{line.destination}
+                </p:column>
+                <p:column headerText="Tipus">
+                    #{line.busType}
+                </p:column>
+            </p:dataTable>
+
+            <h2 style="margin-top:40px">Crear Nova Línea</h2>
+
+            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+
+                <p:outputLabel for="lineId" value="ID Línea:" />
+                <p:inputText id="lineId" value="#{buslineFormBean.lineId}" required="true"/>
+
+                <p:outputLabel for="name" value="Nom:" />
+                <p:inputText id="name" value="#{buslineFormBean.name}" required="true"/>
+
+                <p:outputLabel for="origin" value="Orígen:" />
+                <p:inputText id="origin" value="#{buslineFormBean.origin}" required="true"/>
+
+                <p:outputLabel for="destination" value="Destí:" />
+                <p:inputText id="destination" value="#{buslineFormBean.destination}" required="true"/>
+
+                <p:outputLabel for="busType" value="Tipus de Bus:" />
+                <p:selectOneMenu id="busType" value="#{buslineFormBean.busType}">
+                    <f:selectItem itemLabel="Selecciona una" itemValue="#{null}" />
+                    <f:selectItems value="#{buslineFormBean.busTypes}" var="type"
+                                   itemLabel="#{type}" itemValue="#{type}" />
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:commandButton value="Crear Línea" action="#{buslineFormBean.createBusline}"
+                             update="@form" icon="pi pi-plus" style="margin-top">
+
+            </p:commandButton>
+
+            <!--
             <ui:include src="/templates/bus_header.xhtml"/>
             <ui:include src="/templates/buslines_table.xhtml"/>
             <ui:include src="/templates/new_busline_form.xhtml"/>
+            -->
         </h:form>
     </h:body>
 </html>

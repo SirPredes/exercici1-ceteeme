@@ -9,10 +9,13 @@ import org.example.transport.schedule.domain.Schedule;
 import org.example.transport.schedule.domain.ScheduleId;
 import org.example.transport.schedule.domain.ScheduleRepository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Dependent
-public class ScheduleCreator {
+public class ScheduleCreator implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private ScheduleRepository scheduleRepo;
     private BuslineRepository buslineRepo;
 

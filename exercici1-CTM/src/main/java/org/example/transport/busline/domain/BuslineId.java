@@ -1,6 +1,10 @@
 package org.example.transport.busline.domain;
 
-public class BuslineId {
+import java.io.Serializable;
+
+public class BuslineId implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String value;
 
     private BuslineRepository repository;
@@ -14,7 +18,7 @@ public class BuslineId {
     }
 
     private void createId(String id, BuslineRepository repository){
-        if(repository.findById(id).isPresent()){
+        if(repository.findById(id).isEmpty()){
             this.value = id;
             this.repository = repository;
         }else{

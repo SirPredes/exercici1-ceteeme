@@ -3,10 +3,13 @@ package org.example.transport.schedule.domain;
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.busline.domain.BuslineId;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Schedule {
+public class Schedule implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private BuslineId buslineId;
     private ScheduleId scheduleId;
 

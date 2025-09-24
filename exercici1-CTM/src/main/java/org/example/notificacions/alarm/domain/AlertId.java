@@ -14,7 +14,7 @@ public class AlertId {
     }
 
     private void createId(String id, AlertRepository repository){
-        if(repository.findById(id).isPresent()){
+        if(repository.findById(id).isEmpty()){
             this.value = id;
             this.repository = repository;
         }else{

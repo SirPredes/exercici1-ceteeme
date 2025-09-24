@@ -1,6 +1,6 @@
 package org.example.transport.web;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.example.transport.busline.application.create.BuslineCreator;
@@ -8,12 +8,14 @@ import org.example.transport.busline.domain.BusType;
 import org.example.transport.schedule.application.create.ScheduleCreator;
 import org.example.transport.schedule.application.find.AllSchedulesSearcher;
 import org.example.transport.schedule.application.find.FindScheduleByScheduleId;
+import org.example.transport.schedule.domain.Schedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Named("buslineFormBean")
-@RequestScoped
+@ViewScoped
 public class BuslineFormBean implements Serializable {
 
     @Inject
@@ -35,7 +37,13 @@ public class BuslineFormBean implements Serializable {
     private BusType busType;
 
     public void createBusline() {
-        int oldScheduleId = Integer.parseInt(allSchedulesSearcher.search().getLast().getScheduleId().value());
+        Optional<Schedule> s= allSchedulesSearcher.search().stream().findAny();
+        int oldScheduleId;
+        if(s.isEmpty()){
+            oldScheduleId = 1;
+        }else{
+            oldScheduleId = Integer.parseInt(s.get().getScheduleId().value());
+        }
         String scheduleId = String.valueOf(oldScheduleId + 1);
 
         scheduleCreator.create(lineId, scheduleId, new ArrayList<>(), "");
@@ -72,4 +80,5 @@ public class BuslineFormBean implements Serializable {
 
     public BusType getBusType() { return busType; }
     public void setBusType(BusType busType) { this.busType = busType; }
+    public BusType[] getBusTypes(){ return BusType.values(); }
 }

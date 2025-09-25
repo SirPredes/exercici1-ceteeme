@@ -1,4 +1,4 @@
-package org.example.transport.web;
+package org.example.transport.web.busline;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;

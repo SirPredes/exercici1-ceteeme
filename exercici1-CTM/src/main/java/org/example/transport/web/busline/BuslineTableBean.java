@@ -1,4 +1,4 @@
-package org.example.transport.web;
+package org.example.transport.web.busline;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;

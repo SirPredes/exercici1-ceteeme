@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h2 style="margin-top:40px">Crear Nova Línea</h2>
+
+    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+
+        <p:outputLabel for="lineId" value="ID Línea:" />
+        <p:inputText id="lineId" value="#{buslineFormBean.lineId}" required="true"/>
+
+        <p:outputLabel for="name" value="Nom:" />
+        <p:inputText id="name" value="#{buslineFormBean.name}" required="true"/>
+
+        <p:outputLabel for="origin" value="Orígen:" />
+        <p:inputText id="origin" value="#{buslineFormBean.origin}" required="true"/>
+
+        <p:outputLabel for="destination" value="Destí:" />
+        <p:inputText id="destination" value="#{buslineFormBean.destination}" required="true"/>
+
+        <p:outputLabel for="busType" value="Tipus de Bus:" />
+        <p:selectOneMenu id="busType" value="#{buslineFormBean.busType}">
+            <f:selectItem itemLabel="Selecciona una" itemValue="#{null}" />
+            <f:selectItems value="#{buslineFormBean.busTypes}" var="type"
+                           itemLabel="#{type}" itemValue="#{type}" />
+        </p:selectOneMenu>
+
+    </p:panelGrid>
+
+    <p:commandButton value="Crear Línea" action="#{buslineFormBean.createBusline}"
+                     update="@form" icon="pi pi-plus" style="margin-top">
+    </p:commandButton>
+
+    <p:growl id="growl" showDetail="true" life="4000" />
+
+</ui:composition>

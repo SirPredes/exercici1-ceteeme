@@ -13,6 +13,10 @@ public class WarningId {
         return value;
     }
 
+    public String getValue(){
+        return value;
+    }
+
     private void createId(String id, WarningRepository repository){
         if(repository.findById(id).isEmpty()){
             this.value = id;

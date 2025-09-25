@@ -13,6 +13,10 @@ public class AlertId {
         return value;
     }
 
+    public String getValue(){
+        return value;
+    }
+
     private void createId(String id, AlertRepository repository){
         if(repository.findById(id).isEmpty()){
             this.value = id;

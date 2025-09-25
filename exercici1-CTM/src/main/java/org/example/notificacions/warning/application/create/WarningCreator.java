@@ -1,13 +1,20 @@
 package org.example.notificacions.warning.application.create;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import org.example.notificacions.warning.domain.Warning;
 import org.example.notificacions.warning.domain.WarningRepository;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WarningCreator {
+@Dependent
+public class WarningCreator implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private WarningRepository repository;
 
+    @Inject
     public WarningCreator(WarningRepository repository){
         this.repository = repository;
     }

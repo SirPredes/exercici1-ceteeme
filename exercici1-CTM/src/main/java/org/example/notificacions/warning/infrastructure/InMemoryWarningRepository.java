@@ -1,11 +1,13 @@
 package org.example.notificacions.warning.infrastructure;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.example.notificacions.warning.domain.Warning;
 import org.example.notificacions.warning.domain.WarningId;
 import org.example.notificacions.warning.domain.WarningRepository;
 
 import java.util.*;
 
+@ApplicationScoped
 public class InMemoryWarningRepository implements WarningRepository {
     private final Map<String, List<Warning>> warnings = new TreeMap<>();
 

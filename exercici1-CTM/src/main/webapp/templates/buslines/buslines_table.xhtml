@@ -19,7 +19,7 @@
     <p:dataTable id="buslineTable" value="#{buslineTableBean.buslines}" var="line"
                  paginator="true" rows="#{buslineTableBean.rows}" responsiveLayout="scroll">
 
-        <p:column headerText="Nº">
+        <p:column headerText="ID">
             #{line.buslineId.value}
         </p:column>
         <p:column headerText="Nom">

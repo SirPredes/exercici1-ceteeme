@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:dataTable id="alertTable" value="#{alertTableBean.alerts}" var="alert"
+                 paginator="true" rows="#{alertTableBean.rows}" responsiveLayout="scroll">
+        <p:column headerText="ID">
+            #{alert.alertId.value}
+        </p:column>
+        <p:column headerText="Data">
+            #{alert.alertDate}
+        </p:column>
+        <p:column headerText="ID Bus">
+            #{alert.buslineId}
+        </p:column>
+        <p:column headerText="ID Parada">
+            #{alert.busStopId}
+        </p:column>
+        <p:column headerText="Descripció">
+            #{alert.description}
+        </p:column>
+
+    </p:dataTable>
+
+    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" style="margin-bottom:10px">
+        <p:outputLabel for="rowsPerPage" value="Mostrar:"/>
+        <p:selectOneMenu id="rowsPerPage" value="#{alertTableBean.rows}" style="width: 100px">
+            <f:selectItem itemLabel="10" itemValue="10" />
+            <f:selectItem itemLabel="20" itemValue="20" />
+            <f:selectItem itemLabel="50" itemValue="50" />
+            <f:selectItem itemLabel="Totes" itemValue="#{buslineTableBean.buslines.size()}" />
+            <p:ajax update="alertTable" />
+        </p:selectOneMenu>
+    </p:panelGrid>
+</ui:composition>

@@ -1,13 +1,20 @@
 package org.example.notificacions.alarm.application.create;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import org.example.notificacions.alarm.domain.Alert;
 import org.example.notificacions.alarm.domain.AlertRepository;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AlertCreator {
+@Dependent
+public class AlertCreator implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private AlertRepository repository;
 
+    @Inject
     public AlertCreator(AlertRepository repository){
         this.repository = repository;
     }

@@ -1,11 +1,13 @@
 package org.example.notificacions.alarm.infrastructure;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.example.notificacions.alarm.domain.Alert;
 import org.example.notificacions.alarm.domain.AlertId;
 import org.example.notificacions.alarm.domain.AlertRepository;
 
 import java.util.*;
 
+@ApplicationScoped
 public class InMemoryAlertRepository implements AlertRepository {
     private final Map<String, List<Alert>> alerts = new TreeMap<>();
 

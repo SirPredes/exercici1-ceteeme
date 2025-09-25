@@ -29,7 +29,12 @@ public class ScheduleCreator implements Serializable {
         BuslineId verifiedBuslineId = buslineRepo.verifiedBuslineId(buslineId);
         ScheduleId verifiedScheduleId = scheduleRepo.verifiedScheduleId(scheduleId);
 
-        Schedule newSchedule = new Schedule(verifiedBuslineId, verifiedScheduleId, TimeTable, busStopList);
+        Schedule newSchedule = new Schedule(
+                verifiedBuslineId,
+                verifiedScheduleId,
+                TimeTable,
+                busStopList
+        );
 
         scheduleRepo.save(verifiedBuslineId.value(), newSchedule);
     }

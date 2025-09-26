@@ -39,6 +39,5 @@ public class WarningTableBean  implements Serializable {
 
     public void reload(){
         warnings = allWarningSearcher.search();
-        System.out.println("Ha arribat al reload de warningTable");
     }
 }

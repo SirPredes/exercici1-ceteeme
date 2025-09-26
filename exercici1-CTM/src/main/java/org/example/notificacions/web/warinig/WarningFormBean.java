@@ -15,6 +15,7 @@ import org.example.transport.busline.domain.Busline;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -67,10 +68,12 @@ public class WarningFormBean  implements Serializable {
             if (optLine.isEmpty() || optStop.isEmpty()) {
                 showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear avís", "La línia o la parada no existeixen");
             } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(targetDate, formatter);
                 warningCreator.create(
                         obtainWarningId(),
                         LocalDate.now(),
-                        LocalDate.parse(targetDate),
+                        date,
                         optLine.get().getBuslineId().value(),
                         optStop.get().getStopId().value(),
                         direction,

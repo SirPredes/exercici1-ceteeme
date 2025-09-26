@@ -69,25 +69,12 @@ public class BuslineFormBean implements Serializable {
         busType = null;
     }
 
-    // Getters y setters
-    public String getLineId() { return lineId; }
-    public void setLineId(String lineId) { this.lineId = lineId; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getOrigin() { return origin; }
-    public void setOrigin(String origin) { this.origin = origin; }
-
-    public String getDestination() { return destination; }
-    public void setDestination(String destination) { this.destination = destination; }
-
-    public BusType getBusType() { return busType; }
-    public void setBusType(BusType busType) { this.busType = busType; }
-    public BusType[] getBusTypes(){ return BusType.values(); }
-
     private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+        FacesContext.getCurrentInstance()
+                .addMessage(
+                        null,
+                        new FacesMessage(severity, summary, detail)
+                );
     }
 
     public String obtainScheduleId(){
@@ -98,4 +85,22 @@ public class BuslineFormBean implements Serializable {
                         .orElse(0) + 1
         );
     }
+
+    // Getters y setters
+    public String getLineId() { return lineId; }
+
+    public void setLineId(String lineId) { this.lineId = lineId; }
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+    public String getOrigin() { return origin; }
+
+    public void setOrigin(String origin) { this.origin = origin; }
+    public String getDestination() { return destination; }
+
+    public void setDestination(String destination) { this.destination = destination; }
+    public BusType getBusType() { return busType; }
+    public void setBusType(BusType busType) { this.busType = busType; }
+
+    public BusType[] getBusTypes(){ return BusType.values(); }
 }

@@ -70,6 +70,7 @@ public class WarningFormBean  implements Serializable {
             } else {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(targetDate, formatter);
+
                 warningCreator.create(
                         obtainWarningId(),
                         LocalDate.now(),
@@ -90,7 +91,11 @@ public class WarningFormBean  implements Serializable {
     }
 
     private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+        FacesContext.getCurrentInstance()
+                .addMessage(
+                        null,
+                        new FacesMessage(severity, summary, detail)
+                );
     }
 
     private void clearForm(){

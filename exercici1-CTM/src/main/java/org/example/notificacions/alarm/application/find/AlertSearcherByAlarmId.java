@@ -16,11 +16,9 @@ public class AlertSearcherByAlarmId {
         Optional<Alert> alertOpt = repository.findById(id);
 
         if (alertOpt.isEmpty()){
-            throw new IllegalArgumentException("Alerta no encontrada: " + id);
+            throw new IllegalArgumentException("Alerta no trobada: " + id);
         }
 
-        Alert alert = alertOpt.get();
-
-        return alert;
+        return alertOpt.get();
     }
 }

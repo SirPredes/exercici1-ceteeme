@@ -84,7 +84,11 @@ public class AlertFormBean  implements Serializable {
     }
 
     private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+        FacesContext.getCurrentInstance()
+                .addMessage(
+                        null,
+                        new FacesMessage(severity, summary, detail)
+                );
     }
 
     private void clearForm(){

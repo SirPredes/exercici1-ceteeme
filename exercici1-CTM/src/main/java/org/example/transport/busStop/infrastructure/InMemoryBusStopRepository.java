@@ -17,7 +17,9 @@ public class InMemoryBusStopRepository implements BusStopRepository {
 
     @Override
     public List<BusStop> findAllOrderedById(){
-        return busStops.values().stream().toList();
+        return busStops.values()
+                .stream()
+                .toList();
     }
 
     @Override

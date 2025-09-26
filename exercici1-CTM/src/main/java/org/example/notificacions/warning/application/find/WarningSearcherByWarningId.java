@@ -19,8 +19,6 @@ public class WarningSearcherByWarningId {
             throw new IllegalArgumentException("Warning no encontrado: " + id);
         }
 
-        Warning warning = warningOpt.get();
-
-        return warning;
+        return warningOpt.get();
     }
 }

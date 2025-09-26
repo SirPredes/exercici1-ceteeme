@@ -1,5 +1,6 @@
 package org.example.transport.busStop.infrastructure;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.busStop.domain.BusStopId;
 import org.example.transport.busStop.domain.BusStopRepository;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 
+@ApplicationScoped
 public class InMemoryBusStopRepository implements BusStopRepository {
     private final Map<String, BusStop> busStops = new TreeMap<>();
 

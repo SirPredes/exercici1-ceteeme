@@ -5,9 +5,6 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
-        <p:outputLabel for="alertId" value="ID Alerta:" />
-        <p:inputText id="alertId" value="#{alertFormBean.alertId}" required="true"/>
-
         <p:outputLabel for="buslineId" value="ID Bus" />
         <p:inputText id="buslineId" value="#{alertFormBean.buslineId}" required="true"/>
 
@@ -20,8 +17,8 @@
     </p:panelGrid>
 
     <p:commandButton value="Crear Alerta" action="#{alertFormBean.createAlert}"
-                     update="alertTable" icon="pi pi-plus" style="margin-top">
+                     update="@form alertTable:alertTable" process="@form" icon="pi pi-plus" style="margin-top">
     </p:commandButton>
 
-    <p:growl id="growl" showDetail="true" life="4000" />
+    <p:growl id="globalGrowl" showDetail="true" life="4000" />
 </ui:composition>

@@ -7,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.example.notificacions.alarm.application.create.AlertCreator;
 import org.example.notificacions.alarm.application.find.AllAlertSearcher;
-import org.example.notificacions.alarm.domain.Alert;
 import org.example.transport.busStop.application.create.BusStopCreator;
 import org.example.transport.busStop.application.find.FindBusStopByBusStopId;
 import org.example.transport.busStop.domain.BusStop;
@@ -39,71 +38,67 @@ public class AlertFormBean  implements Serializable {
     @Inject
     private FindBusStopByBusStopId findBusStopByBusStopId;
 
-    private String alertId;
+    @Inject
+    private AlertTableBean alertTableBean;
+
     private String buslineId;
     private String busStopId;
     private String description;
 
     public void createAlert(){
-        String alertId = obtainAlertId();
-
-
-
         try{
-            //FOR NOW WE CREATE BUS STOPS HERE BECAUSE THERE ISN'T AN INTERFACE FOR THAT YET
-            Set<Busline> busSet = new HashSet<>();
-            busSet.add(findBuslineByBuslineId.search(buslineId).get());
-
             Optional<Busline> optLine = findBuslineByBuslineId.search(buslineId);
             Optional<BusStop> optStop = findBusStopByBusStopId.search(busStopId);
 
-            if(optLine.isEmpty() || optStop.isEmpty()){
-                FacesContext.getCurrentInstance()
-                        .addMessage(
-                                null,
-                                new FacesMessage(
-                                        FacesMessage.SEVERITY_ERROR,
-                                        "Error al crear Alerta",
-                                        "La línia o la parada no existeixen"
-                                )
-                        );
-            }else{
+            //FOR NOW WE CREATE BUS STOPS HERE BECAUSE THERE ISN'T AN INTERFACE FOR THAT YET
+            if(optStop.isEmpty()){
+                Set<Busline> busSet = new HashSet<>();
+                busSet.add(optLine.get());
 
                 busStopCreator.create(
                         "1",
                         "C/Example Address, 33",
                         busSet
                 );
+                optStop = findBusStopByBusStopId.search(busStopId);
+            }
+
+            if (optLine.isEmpty() || optStop.isEmpty()) {
+                showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear alerta", "La línia o la parada no existeixen");
+            }else{
                 alertCreator.create(
-                        alertId,
+                        obtainAlertId(),
                         LocalDate.now(),
                         optLine.get().getBuslineId().value(),
                         optStop.get().getStopId().value(),
                         description
                 );
 
-                FacesContext.getCurrentInstance()
-                        .addMessage(
-                                null,
-                                new FacesMessage(
-                                        FacesMessage.SEVERITY_INFO,
-                                        "Alerta creada correctamente",
-                                        null
-                                )
-                        );
+                alertTableBean.reload();
+                clearForm();
+                showMessage(FacesMessage.SEVERITY_INFO, "Alerta creada correctament", null);
             }
-
         }catch(IllegalArgumentException e){
-            FacesContext.getCurrentInstance()
-                    .addMessage(
-                            null,
-                            new FacesMessage(
-                                    FacesMessage.SEVERITY_ERROR,
-                                    "Error al crear Alerta",
-                                    "Algun error ha ocorregut a l'hora de crear l'alarma"
-                            )
-                    );
+            showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear alerta", e.getMessage());
         }
+    }
+
+    private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+
+    private void clearForm(){
+        buslineId = busStopId = description = null;
+    }
+
+    private String obtainAlertId() {
+        return String.valueOf(
+                allAlertSearcher.search().stream()
+                        .mapToInt(a -> Integer.parseInt(a.getAlertId().getValue()))
+                        .max()
+                        .orElse(0) + 1
+        );
+
     }
 
     public String getDescription() {
@@ -128,22 +123,6 @@ public class AlertFormBean  implements Serializable {
 
     public void setBuslineId(String buslineId) {
         this.buslineId = buslineId;
-    }
-
-    public String getAlertId() {
-        return alertId;
-    }
-
-    public void setAlertId(String alertId) {
-        this.alertId = alertId;
-    }
-
-    private String obtainAlertId() {
-        Optional<Alert> a = allAlertSearcher.search().stream().findAny();
-
-        int oldAlertId = a.map(alert -> Integer.parseInt(alert.getAlertId().value())).orElse(1);
-
-        return String.valueOf(oldAlertId + 1);
     }
 
 }

@@ -8,29 +8,32 @@
         <title>Gestió d'avisos i alertes</title>
     </h:head>
 
-    <h:form id="headerForm">
-        <ui:include src="/templates/buslines/bus_header.xhtml"/>
-    </h:form>
+    <h:body>
 
-    <h2>Llistat d'Avisos i Alertes</h2>
+        <h:form id="headerForm">
+            <ui:include src="/templates/buslines/bus_header.xhtml"/>
+        </h:form>
 
-    <h4>Alertes</h4>
-    <h:form id="alertTable">
-        <ui:include src="/templates/alerts/alert_table.xhtml"/>
-    </h:form>
+        <h2>Llistat d'Avisos i Alertes</h2>
 
-    <h4>Avisos</h4>
-    <h:form id="warningTable">
-        <ui:include src="/templates/warnings/warning_table.xhtml"/>
-    </h:form>
+        <h4>Alertes</h4>
+        <h:form id="alertTable">
+            <ui:include src="/templates/alerts/alert_table.xhtml"/>
+        </h:form>
 
-    <h3>Nova alerta</h3>
-    <h:form id="alertForm">
-        <ui:include src="/templates/alerts/new_alert_form.xhtml"/>
-    </h:form>
+        <h4>Avisos</h4>
+        <h:form id="warningTable">
+            <ui:include src="/templates/warnings/warning_table.xhtml"/>
+        </h:form>
 
-    <h3>Nou avís</h3>
-    <h:form id="warningForm">
-        <ui:include src="/templates/warnings/new_warning_form.xhtml"/>
-    </h:form>
+        <h3>Nova alerta</h3>
+        <h:form id="alertForm">
+            <ui:include src="/templates/alerts/new_alert_form.xhtml"/>
+        </h:form>
+
+        <h3>Nou avís</h3>
+        <h:form id="warningForm">
+            <ui:include src="/templates/warnings/new_warning_form.xhtml"/>
+        </h:form>
+    </h:body>
 </html>

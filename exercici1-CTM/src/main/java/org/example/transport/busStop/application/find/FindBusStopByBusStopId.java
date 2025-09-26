@@ -1,6 +1,7 @@
 package org.example.transport.busStop.application.find;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.busStop.domain.BusStopRepository;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class FindBusStopByBusStopId implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Inject
     private BusStopRepository busStopRepository;
 
     public FindBusStopByBusStopId(){}

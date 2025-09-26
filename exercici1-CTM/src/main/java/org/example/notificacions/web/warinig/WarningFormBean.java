@@ -7,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.example.notificacions.warning.application.create.WarningCreator;
 import org.example.notificacions.warning.application.find.AllWarningSearcher;
-import org.example.notificacions.warning.domain.Warning;
 import org.example.transport.busStop.application.create.BusStopCreator;
 import org.example.transport.busStop.application.find.FindBusStopByBusStopId;
 import org.example.transport.busStop.domain.BusStop;
@@ -31,7 +30,7 @@ public class WarningFormBean  implements Serializable {
     private BusStopCreator busStopCreator;
 
     @Inject
-    private AllWarningSearcher allwarningSearcher;
+    private AllWarningSearcher allWarningSearcher;
 
     @Inject
     private FindBuslineByBuslineId findBuslineByBuslineId;
@@ -39,35 +38,22 @@ public class WarningFormBean  implements Serializable {
     @Inject
     private FindBusStopByBusStopId findBusStopByBusStopId;
 
-    private String warningId;
+    @Inject
+    private WarningTableBean warningTableBean;
     private String targetDate;
     private String buslineId;
     private String busStopId;
     private String direction;
     private String description;
 
-    public void createWarning(){
-        String warningId = obtainWarningId();
-
-        try{
-            //FOR NOW WE CREATE BUS STOPS HERE BECAUSE THERE ISN'T AN INTERFACE FOR THAT YET
-            Set<Busline> busSet = new HashSet<>();
-
-
+    public void createWarning() {
+        try {
             Optional<Busline> optLine = findBuslineByBuslineId.search(buslineId);
             Optional<BusStop> optStop = findBusStopByBusStopId.search(busStopId);
 
-            if(optLine.isEmpty() || optStop.isEmpty()){
-                FacesContext.getCurrentInstance()
-                        .addMessage(
-                                null,
-                                new FacesMessage(
-                                        FacesMessage.SEVERITY_ERROR,
-                                        "Error al crear avís",
-                                        "La línia o la parada no existeixen"
-                                )
-                        );
-            }else{
+            //FOR NOW WE CREATE BUS STOPS HERE BECAUSE THERE ISN'T AN INTERFACE FOR THAT YET
+            if(optStop.isEmpty()){
+                Set<Busline> busSet = new HashSet<>();
                 busSet.add(optLine.get());
 
                 busStopCreator.create(
@@ -75,8 +61,14 @@ public class WarningFormBean  implements Serializable {
                         "C/Example Address, 33",
                         busSet
                 );
+                optStop = findBusStopByBusStopId.search(busStopId);
+            }
+
+            if (optLine.isEmpty() || optStop.isEmpty()) {
+                showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear avís", "La línia o la parada no existeixen");
+            } else {
                 warningCreator.create(
-                        warningId,
+                        obtainWarningId(),
                         LocalDate.now(),
                         LocalDate.parse(targetDate),
                         optLine.get().getBuslineId().value(),
@@ -85,28 +77,30 @@ public class WarningFormBean  implements Serializable {
                         description
                 );
 
-                FacesContext.getCurrentInstance()
-                        .addMessage(
-                                null,
-                                new FacesMessage(
-                                        FacesMessage.SEVERITY_INFO,
-                                        "Alvis creat correctamente",
-                                        null
-                                )
-                        );
+                warningTableBean.reload();
+                clearForm();
+                showMessage(FacesMessage.SEVERITY_INFO, "Avís creat correctament", null);
             }
-
         }catch(IllegalArgumentException e){
-            FacesContext.getCurrentInstance()
-                    .addMessage(
-                            null,
-                            new FacesMessage(
-                                    FacesMessage.SEVERITY_ERROR,
-                                    "Error al crear warninga",
-                                    "Algun error ha ocorregut a l'hora de crear l'avís"
-                            )
-                    );
+            showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear l'avís", e.getMessage());
         }
+    }
+
+    private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+
+    private void clearForm(){
+        targetDate = buslineId = busStopId = direction = description = null;
+    }
+
+    private String obtainWarningId() {
+        return String.valueOf(
+                allWarningSearcher.search().stream()
+                        .mapToInt(a -> Integer.parseInt(a.getWarningId().getValue()))
+                        .max()
+                        .orElse(0) + 1
+        );
     }
 
     public String getDescription() {
@@ -125,6 +119,22 @@ public class WarningFormBean  implements Serializable {
         this.busStopId = busStopId;
     }
 
+    public String getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(String targetDate) {
+        this.targetDate = targetDate;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     public String getBuslineId() {
         return buslineId;
     }
@@ -132,21 +142,4 @@ public class WarningFormBean  implements Serializable {
     public void setBuslineId(String buslineId) {
         this.buslineId = buslineId;
     }
-
-    public String getWarningId() {
-        return warningId;
-    }
-
-    public void setWarningId(String warningId) {
-        this.warningId = warningId;
-    }
-
-    private String obtainWarningId() {
-        Optional<Warning> a = allwarningSearcher.search().stream().findAny();
-
-        int oldWarningId = a.map(warning -> Integer.parseInt(warning.getWarningId().value())).orElse(1);
-
-        return String.valueOf(oldWarningId + 1);
-    }
-
 }

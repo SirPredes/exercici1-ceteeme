@@ -5,8 +5,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
-        <p:outputLabel for="warningId" value="ID Avís:" />
-        <p:inputText id="warningId" value="#{warningFormBean.warningId}" required="true"/>
+        <p:outputLabel for="targetDate" value="Data: (YYYY-MM-DD)" />
+        <p:inputText id="targetDate" value="#{warningFormBean.targetDate}" required="true"/>
 
         <p:outputLabel for="buslineId" value="ID Bus" />
         <p:inputText id="buslineId" value="#{warningFormBean.buslineId}" required="true"/>
@@ -20,8 +20,8 @@
     </p:panelGrid>
 
     <p:commandButton value="Crear Avís" action="#{warningFormBean.createWarning}"
-                     update="warningTable" icon="pi pi-plus" style="margin-top">
+                     update="@form warningTable:warningTable" icon="pi pi-plus" style="margin-top">
     </p:commandButton>
 
-    <p:growl id="growl" showDetail="true" life="4000" />
+    <p:growl id="globalGrowl" showDetail="true" life="4000" />
 </ui:composition>

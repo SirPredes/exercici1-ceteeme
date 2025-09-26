@@ -39,5 +39,6 @@ public class AlertTableBean  implements Serializable {
 
     public void reload(){
         alerts = allAlertSearcher.search();
+        System.out.println("Ha arribat al reload de AlertTable");
     }
 }

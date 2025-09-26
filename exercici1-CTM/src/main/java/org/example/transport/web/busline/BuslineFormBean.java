@@ -10,11 +10,9 @@ import org.example.transport.busline.domain.BusType;
 import org.example.transport.schedule.application.create.ScheduleCreator;
 import org.example.transport.schedule.application.find.AllSchedulesSearcher;
 import org.example.transport.schedule.application.find.FindScheduleByScheduleId;
-import org.example.transport.schedule.domain.Schedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Named("buslineFormBean")
 @ViewScoped
@@ -56,18 +54,10 @@ public class BuslineFormBean implements Serializable {
                     busType
             );
 
-            FacesContext.getCurrentInstance()
-                    .addMessage(
-                            null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Línea creada correctamente", null)
-                    );
+            showMessage(FacesMessage.SEVERITY_INFO, "Línea creada correctamente", null);
 
         }catch(IllegalArgumentException e){
-            FacesContext.getCurrentInstance()
-                    .addMessage(
-                            null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear línea", e.getMessage())
-                    );
+            showMessage(FacesMessage.SEVERITY_ERROR, "Error al crear línea", e.getMessage());
         }
 
         buslineTableBean.reload();
@@ -96,11 +86,16 @@ public class BuslineFormBean implements Serializable {
     public void setBusType(BusType busType) { this.busType = busType; }
     public BusType[] getBusTypes(){ return BusType.values(); }
 
+    private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+
     public String obtainScheduleId(){
-        Optional<Schedule> s= allSchedulesSearcher.search().stream().findAny();
-
-        int oldScheduleId = s.map(schedule -> Integer.parseInt(schedule.getScheduleId().value())).orElse(1);
-
-        return String.valueOf(oldScheduleId + 1);
+        return String.valueOf(
+                allSchedulesSearcher.search().stream()
+                        .mapToInt(s -> Integer.parseInt(s.getScheduleId().value()))
+                        .max()
+                        .orElse(0) + 1
+        );
     }
 }

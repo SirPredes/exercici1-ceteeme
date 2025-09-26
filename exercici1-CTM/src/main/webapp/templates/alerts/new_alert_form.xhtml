@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+
+        <p:outputLabel for="alertId" value="ID Alerta:" />
+        <p:inputText id="alertId" value="#{alertFormBean.alertId}" required="true"/>
+
+        <p:outputLabel for="buslineId" value="ID Bus" />
+        <p:inputText id="buslineId" value="#{alertFormBean.buslineId}" required="true"/>
+
+        <p:outputLabel for="busStopId" value="ID parada" />
+        <p:inputText id="busStopId" value="#{alertFormBean.busStopId}" required="true"/>
+
+        <p:outputLabel for="description" value="Descripció" />
+        <p:inputText id="description" value="#{alertFormBean.description}" required="true"/>
+
+    </p:panelGrid>
+
+    <p:commandButton value="Crear Alerta" action="#{alertFormBean.createAlert}"
+                     update="alertTable" icon="pi pi-plus" style="margin-top">
+    </p:commandButton>
+
+    <p:growl id="growl" showDetail="true" life="4000" />
+</ui:composition>

@@ -11,6 +11,7 @@ import java.util.Optional;
 @Dependent
 public class FindScheduleByScheduleId implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private ScheduleRepository repository;
 
     public FindScheduleByScheduleId(){}

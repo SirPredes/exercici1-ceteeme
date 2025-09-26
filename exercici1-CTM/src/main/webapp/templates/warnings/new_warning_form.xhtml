@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+
+        <p:outputLabel for="warningId" value="ID Avís:" />
+        <p:inputText id="warningId" value="#{warningFormBean.warningId}" required="true"/>
+
+        <p:outputLabel for="buslineId" value="ID Bus" />
+        <p:inputText id="buslineId" value="#{warningFormBean.buslineId}" required="true"/>
+
+        <p:outputLabel for="busStopId" value="ID parada" />
+        <p:inputText id="busStopId" value="#{warningFormBean.busStopId}" required="true"/>
+
+        <p:outputLabel for="description" value="Descripció" />
+        <p:inputText id="description" value="#{warningFormBean.description}" required="true"/>
+
+    </p:panelGrid>
+
+    <p:commandButton value="Crear Avís" action="#{warningFormBean.createWarning}"
+                     update="warningTable" icon="pi pi-plus" style="margin-top">
+    </p:commandButton>
+
+    <p:growl id="growl" showDetail="true" life="4000" />
+</ui:composition>

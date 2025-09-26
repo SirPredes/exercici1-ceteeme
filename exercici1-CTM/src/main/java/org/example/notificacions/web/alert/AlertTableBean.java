@@ -1,4 +1,4 @@
-package org.example.transport.web.alert;
+package org.example.notificacions.web.alert;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;

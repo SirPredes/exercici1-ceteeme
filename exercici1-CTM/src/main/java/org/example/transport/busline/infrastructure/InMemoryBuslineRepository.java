@@ -18,14 +18,17 @@ public class InMemoryBuslineRepository implements BuslineRepository {
     public InMemoryBuslineRepository(){}
 
     @Override
-    public Optional<Busline> findById(String id) {
-        return Optional.ofNullable(buslines.get(id));
+    public List<Busline> findAllOrderedById() {
+        return buslines.values()
+                .stream()
+                .toList();
     }
 
     @Override
-    public List<Busline> findAllOrderedById() {
-        return buslines.values().stream()
-                .toList();
+    public Optional<Busline> findById(String id) {
+        return this.findAllOrderedById().stream()
+                .filter(b -> b.getBuslineId().value().equals(id))
+                .findAny();
     }
 
     @Override

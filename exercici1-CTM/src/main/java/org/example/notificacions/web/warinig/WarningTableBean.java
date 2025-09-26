@@ -1,4 +1,4 @@
-package org.example.transport.web.warinig;
+package org.example.notificacions.web.warinig;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;

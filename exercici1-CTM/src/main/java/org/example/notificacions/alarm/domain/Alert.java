@@ -1,16 +1,19 @@
 package org.example.notificacions.alarm.domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Alert {
+public class Alert implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private AlertId alertId;
-    private Date alertDate;
+    private LocalDate alertDate;
 
     private String buslineId;
     private String busStopId;
     private String description;
 
-    public Alert(AlertId alertId, Date alertDate, String buslineId, String busStopId, String description) {
+    public Alert(AlertId alertId, LocalDate alertDate, String buslineId, String busStopId, String description) {
         this.alertId = alertId;
         this.alertDate = alertDate;
         this.buslineId = buslineId;
@@ -26,11 +29,11 @@ public class Alert {
         this.alertId = alertId;
     }
 
-    public Date getAlertDate() {
+    public LocalDate getAlertDate() {
         return alertDate;
     }
 
-    public void setAlertDate(Date alertDate) {
+    public void setAlertDate(LocalDate alertDate) {
         this.alertDate = alertDate;
     }
 

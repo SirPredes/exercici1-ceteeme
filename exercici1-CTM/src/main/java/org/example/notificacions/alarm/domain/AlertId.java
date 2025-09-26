@@ -1,6 +1,10 @@
 package org.example.notificacions.alarm.domain;
 
-public class AlertId {
+import java.io.Serializable;
+
+public class AlertId implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String value;
 
     private AlertRepository repository;

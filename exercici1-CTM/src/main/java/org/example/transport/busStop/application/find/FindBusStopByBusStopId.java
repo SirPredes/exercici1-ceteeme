@@ -1,12 +1,19 @@
 package org.example.transport.busStop.application.find;
 
+import jakarta.enterprise.context.Dependent;
 import org.example.transport.busStop.domain.BusStop;
 import org.example.transport.busStop.domain.BusStopRepository;
 
+import java.io.Serializable;
 import java.util.Optional;
 
-public class FindBusStopByBusStopId {
-    private final BusStopRepository busStopRepository;
+@Dependent
+public class FindBusStopByBusStopId implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private BusStopRepository busStopRepository;
+
+    public FindBusStopByBusStopId(){}
 
     public FindBusStopByBusStopId(BusStopRepository busStopRepository){
         this.busStopRepository = busStopRepository;

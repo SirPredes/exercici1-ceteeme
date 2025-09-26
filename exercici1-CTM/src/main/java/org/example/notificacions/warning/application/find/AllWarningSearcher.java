@@ -10,7 +10,9 @@ import java.util.List;
 public class AllWarningSearcher implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final WarningRepository repository;
+    private WarningRepository repository;
+
+    public AllWarningSearcher(){}
 
     @Inject
     public AllWarningSearcher(WarningRepository repository){

@@ -1,11 +1,14 @@
 package org.example.notificacions.warning.domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Warning {
+public class Warning implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private WarningId warningId;
-    private Date warningDate;
-    private Date targetDate;
+    private LocalDate warningDate;
+    private LocalDate targetDate;
 
     private String buslineId;
     private String busStopId;
@@ -13,7 +16,7 @@ public class Warning {
 
     private String description;
 
-    public Warning(WarningId warningId, Date warningDate, Date targetDate, String buslineId, String busStopId, String direction, String description) {
+    public Warning(WarningId warningId, LocalDate warningDate, LocalDate targetDate, String buslineId, String busStopId, String direction, String description) {
         this.warningId = warningId;
         this.warningDate = warningDate;
         this.targetDate = targetDate;
@@ -31,19 +34,19 @@ public class Warning {
         this.warningId = warningId;
     }
 
-    public Date getWarningDate() {
+    public LocalDate getWarningDate() {
         return warningDate;
     }
 
-    public void setWarningDate(Date warningDate) {
+    public void setWarningDate(LocalDate warningDate) {
         this.warningDate = warningDate;
     }
 
-    public Date getTargetDate() {
+    public LocalDate getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(Date targetDate) {
+    public void setTargetDate(LocalDate targetDate) {
         this.targetDate = targetDate;
     }
 

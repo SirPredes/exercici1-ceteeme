@@ -6,7 +6,7 @@ import org.example.notificacions.warning.domain.Warning;
 import org.example.notificacions.warning.domain.WarningRepository;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Dependent
 public class WarningCreator implements Serializable {
@@ -14,12 +14,14 @@ public class WarningCreator implements Serializable {
 
     private WarningRepository repository;
 
+    public WarningCreator(){}
+
     @Inject
     public WarningCreator(WarningRepository repository){
         this.repository = repository;
     }
 
-    public void create(String warningId, Date warningDate, Date targetDate, String buslineId, String busStopId, String direction, String description){
+    public void create(String warningId, LocalDate warningDate, LocalDate targetDate, String buslineId, String busStopId, String direction, String description){
 
         Warning newWarning = new Warning(repository
                 .verifiedWarningId(warningId),

@@ -1,6 +1,10 @@
 package org.example.notificacions.warning.domain;
 
-public class WarningId {
+import java.io.Serializable;
+
+public class WarningId implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String value;
 
     private WarningRepository repository;
